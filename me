@@ -1,0 +1,60 @@
+# carbon_footprint_calculator.py
+
+def calculate_emissions():
+    print("🌍 Carbon Footprint Calculator 🌿")
+    print("----------------------------------")
+
+    # Get user inputs
+    electricity_kwh = float(input("1️⃣ Enter monthly electricity usage (in kWh): "))
+    car_km = float(input("2️⃣ Enter weekly car travel (in km): "))
+    flights = int(input("3️⃣ Enter number of short-haul flights per year: "))
+    meat_meals = int(input("4️⃣ Enter number of meat-based meals per week: "))
+    waste_kg = float(input("5️⃣ Enter weekly household waste (in kg): "))
+
+    print("\n📊 Calculating your annual carbon footprint...\n")
+
+    # Emission factors (average values)
+    EMISSIONS = {
+        "electricity": 0.45,      # kg CO2 per kWh
+        "car": 0.21,              # kg CO2 per km
+        "flight": 250,            # kg CO2 per short flight
+        "meat_meal": 2.5,         # kg CO2 per meal
+        "waste": 0.75             # kg CO2 per kg
+    }
+
+    # Annual calculations
+    electricity_emissions = electricity_kwh * 12 * EMISSIONS["electricity"]
+    car_emissions = car_km * 52 * EMISSIONS["car"]
+    flight_emissions = flights * EMISSIONS["flight"]
+    meat_emissions = meat_meals * 52 * EMISSIONS["meat_meal"]
+    waste_emissions = waste_kg * 52 * EMISSIONS["waste"]
+
+    total_emissions = (
+        electricity_emissions +
+        car_emissions +
+        flight_emissions +
+        meat_emissions +
+        waste_emissions
+    )
+
+    # Output results
+    print(f"🔌 Electricity Emissions: {electricity_emissions:.2f} kg CO₂/year")
+    print(f"🚗 Car Emissions: {car_emissions:.2f} kg CO₂/year")
+    print(f"✈️ Flight Emissions: {flight_emissions:.2f} kg CO₂/year")
+    print(f"🍖 Diet Emissions: {meat_emissions:.2f} kg CO₂/year")
+    print(f"🗑️ Waste Emissions: {waste_emissions:.2f} kg CO₂/year")
+
+    print("\n🌟 Your estimated **annual carbon footprint** is:")
+    print(f"➡️ {total_emissions:.2f} kg CO₂/year")
+
+    # Comparison
+    global_avg = 4000  # Global average in kg/year (example)
+    if total_emissions > global_avg:
+        print("⚠️ Your footprint is above the global average. Try reducing energy, travel, or meat!")
+    else:
+        print("✅ Great! You're below the global average carbon footprint.")
+
+# Run the calculator
+if __name__ == "__main__":
+    calculate_emissions()
+
